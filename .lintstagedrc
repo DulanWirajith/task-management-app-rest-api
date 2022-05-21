@@ -1,0 +1,8 @@
+{
+    "*.(js|ts|jsx|tsx)": [
+        "yarn lint:fix",
+        "yarn lint",
+        "yarn prettier --write",
+        "yarn test --watchAll=false --findRelatedTests --bail --passWithNoTests"
+    ]
+}
