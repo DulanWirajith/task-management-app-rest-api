@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { Task, TaskStatus } from './task.model';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 // injectable means we can inject this service any component
 @Injectable()
@@ -11,7 +12,9 @@ export class TasksService {
     return this.tasks;
   }
 
-  addTask(title: string, description: string): Task {
+  addTask(createTaskDto: CreateTaskDto): Task {
+    const { title, description } = createTaskDto;
+
     const task: Task = {
       id: randomUUID(),
       title,
