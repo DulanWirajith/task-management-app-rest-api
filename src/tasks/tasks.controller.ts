@@ -5,8 +5,8 @@ import { TasksService } from './tasks.service';
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
-  @Get('/')
-  helloWorld() {
-    return this.tasksService.helloWorld();
+  @Get()
+  getAllTasks() {
+    return this.tasksService.getAllTasks();
   }
 }
