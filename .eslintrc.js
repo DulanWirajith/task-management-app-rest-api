@@ -26,5 +26,12 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     'import/prefer-default-export': 'off',
     'class-methods-use-this': 'off',
+    'object-curly-newline': [
+      'error',
+      {
+        ObjectExpression: { multiline: true, minProperties: 1 },
+      },
+    ],
+    '@typescript-eslint/indent': ['off', 2],
   },
 };
