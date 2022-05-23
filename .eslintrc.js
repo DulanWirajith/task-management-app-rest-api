@@ -33,5 +33,11 @@ module.exports = {
       },
     ],
     '@typescript-eslint/indent': ['off', 2],
+    '@typescript-eslint/lines-between-class-members': 'off',
+    'lines-between-class-members': [
+      'error',
+      'always',
+      { exceptAfterSingleLine: true },
+    ],
   },
 };
