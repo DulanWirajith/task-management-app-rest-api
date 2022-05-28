@@ -39,5 +39,6 @@ module.exports = {
       'always',
       { exceptAfterSingleLine: true },
     ],
+    'implicit-arrow-linebreak': 'warn',
   },
 };
