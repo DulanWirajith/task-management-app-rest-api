@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Patch,
   Post,
@@ -34,7 +36,18 @@ export class TasksController {
 
   @Get('/:id')
   getTaskById(@Param('id') id: string): Task {
-    return this.tasksService.getTaskById(id);
+    const found = this.tasksService.getTaskById(id);
+    if (!found) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: `task with id ${id} not found`,
+        },
+        HttpStatus.NOT_FOUND,
+      );
+      // throw new NotFoundException(`task with id ${id} not found`);
+    }
+    return found;
   }
 
   @Delete('/:id')
