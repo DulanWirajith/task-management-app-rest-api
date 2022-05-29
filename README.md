@@ -50,7 +50,7 @@ git commit -m 'commit message' --no-verify
 ```
 
 ## Committing using commitizen package
-commitizen package helps to work with conventional commits
+commitizen package helps to work with conventional commits.
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
