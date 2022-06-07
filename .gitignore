@@ -2,8 +2,6 @@
 /dist
 /node_modules
 
-# typeorm config file
-./src/config/typeorm.config.ts
 # Logs
 logs
 *.log
@@ -36,3 +34,5 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# env ifile
+.env
