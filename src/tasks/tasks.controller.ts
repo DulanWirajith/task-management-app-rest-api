@@ -1,13 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { TasksService } from './tasks.service';
+import { TaskEntity } from './task.entity';
 
 @Controller('/tasks')
 export class TasksController {
-  constructor(private tasksService: TasksService) {}
+  constructor(private readonly tasksService: TasksService) {}
   @Get()
-  getTasks() {
+  getTasks(): Promise<TaskEntity[]> {
     console.log('get tasks');
     return this.tasksService.getAllTasks();
+  }
+
+  @Get('/:id')
+  getTaskById(@Param('id', ParseIntPipe) id: number) {
+    return this.tasksService.getTaskById(id);
   }
   // @Get()
   // geTasks(@Query(ValidationPipe) filterDto: GetTasksFilterDto): Task[] {
