@@ -7,7 +7,6 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
   @Get()
   getTasks(): Promise<TaskEntity[]> {
-    console.log('get tasks');
     return this.tasksService.getAllTasks();
   }
 
