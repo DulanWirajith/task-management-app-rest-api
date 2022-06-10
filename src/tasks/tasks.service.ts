@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { TaskEntity } from './task.entity';
+import { TaskRepository } from './tasks.repository';
 
 @Injectable()
 export class TasksService {
   constructor(
     @InjectRepository(TaskEntity)
-    private taskRepository: Repository<TaskEntity>,
+    private taskRepository: TaskRepository,
   ) {}
 
   async getAllTasks(): Promise<TaskEntity[]> {
