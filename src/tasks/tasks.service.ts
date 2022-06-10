@@ -1,17 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { TaskEntity } from './task.entity';
 
-// injectable means we can inject this service any component
 @Injectable()
 export class TasksService {
-  // constructor(
-  //   @InjectRepository(TaskRepository)
-  //   private taskRepository: TaskRepository,
-  // ) {}
-  //
-  // async getAllTasks(id: any): Promise<TaskEntity> {
-  //   const found = await this.taskRepository.findOne(id);
-  //   return found;
-  // }
+  constructor(
+    @InjectRepository(TaskEntity)
+    private taskRepository: Repository<TaskEntity>,
+  ) {}
+
+  async getAllTasks(): Promise<TaskEntity[]> {
+    const found = await this.taskRepository.find();
+    return found;
+  }
   //
   // addTask(createTaskDto: CreateTaskDto): Task {
   //   const { title, description } = createTaskDto;
