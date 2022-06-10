@@ -10,9 +10,9 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   database: 'taskmanagement',
   /* eslint-disable */
   // entities -> used to translate tables into databse. these are stored in files.  so we schould say to typeorm which files they are
-  entities: ['dist/src/**/*.entity.js'],
+  entities: ['dist/**/**/*.entity.js'],
   // you can synchronize entities with a database, so there is no need for migirations in development. but this feature not good for production
-  synchronize: false,
+  synchronize: true,
   // migrations: ['dist/src/db/migrations/*.js'],
   // cli: {
   //   migrationsDir: 'src/db/migrations/',
