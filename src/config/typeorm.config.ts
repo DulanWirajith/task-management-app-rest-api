@@ -13,8 +13,8 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   entities: ['dist/src/**/*.entity.js'],
   // you can synchronize entities with a database, so there is no need for migirations in development. but this feature not good for production
   synchronize: false,
-  migrations: ['dist/src/db/migrations/*.js'],
-  cli: {
-    migrationsDir: 'src/db/migrations/',
-  },
+  // migrations: ['dist/src/db/migrations/*.js'],
+  // cli: {
+  //   migrationsDir: 'src/db/migrations/',
+  // },
 };
