@@ -10,9 +10,8 @@ export class TasksService {
     private readonly taskRepository: TaskRepository,
   ) {}
 
-  async getAllTasks(): Promise<TaskEntity[]> {
-    const found = await this.taskRepository.find();
-    return found;
+  getAllTasks(): Promise<TaskEntity[]> {
+    return this.taskRepository.find();
   }
 
   async getTaskById(id: number): Promise<TaskEntity> {
