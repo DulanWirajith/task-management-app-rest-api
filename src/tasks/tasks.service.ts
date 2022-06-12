@@ -12,7 +12,7 @@ export class TasksService {
     private readonly taskRepository: TaskRepository,
   ) {}
 
-  getAllTasks(): Promise<TaskEntity[]> {
+  async getAllTasks(): Promise<TaskEntity[]> {
     return this.taskRepository.find();
   }
 
