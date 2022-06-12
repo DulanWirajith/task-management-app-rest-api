@@ -39,7 +39,6 @@ export class TasksService {
     task.description = description;
     task.status = TaskStatus.OPEN;
     await task.save();
-
     return task;
   }
   //
