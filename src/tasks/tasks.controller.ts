@@ -1,6 +1,15 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  ValidationPipe,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { TaskEntity } from './task.entity';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Controller('/tasks')
 export class TasksController {
@@ -13,6 +22,13 @@ export class TasksController {
   @Get('/:id')
   getTaskById(@Param('id', ParseIntPipe) id: number) {
     return this.tasksService.getTaskById(id);
+  }
+
+  @Post()
+  addTask(
+    @Body(ValidationPipe) createTaskDto: CreateTaskDto,
+  ): Promise<TaskEntity> {
+    return this.tasksService.addTask(createTaskDto);
   }
   // @Get()
   // geTasks(@Query(ValidationPipe) filterDto: GetTasksFilterDto): Task[] {
