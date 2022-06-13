@@ -86,7 +86,17 @@ export class TasksService {
   //   const found = this.getTaskById(id.toString());
   //   this.tasks = this.tasks.filter((task: Task) => task.id !== found.id);
   // }
-  //
+
+  async updateTaskStatusById(
+    id: number,
+    status: TaskStatus,
+  ): Promise<TaskEntity> {
+    const task: TaskEntity = await this.getTaskById(id);
+    task.status = status;
+    await task.save();
+    return task;
+  }
+
   // updateTaskStatusById(id: string, status: TaskStatus): Task {
   //   const task: Task = this.getTaskById(id);
   //   task.status = status;
