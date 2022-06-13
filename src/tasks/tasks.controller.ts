@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -30,13 +31,18 @@ export class TasksController {
   ): Promise<TaskEntity> {
     return this.tasksService.addTask(createTaskDto);
   }
+
+  @Delete('/:id')
+  deleteTaskById(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.tasksService.deleteTaskById(id);
+  }
   // @Get()
   // geTasks(@Query(ValidationPipe) filterDto: GetTasksFilterDto): Task[] {
   //   return Object.keys(filterDto).length
   //     ? this.tasksService.getTasksWithFilters(filterDto)
   //     : this.tasksService.getAllTasks();
   // }
-  //
+  // //
   // @Post()
   // addTask(@Body(ValidationPipe) createTaskDto: CreateTaskDto): Task {
   //   return this.tasksService.addTask(createTaskDto);
