@@ -9,6 +9,7 @@ import { TaskEntity } from './task.entity';
 import { TaskRepository } from './tasks.repository';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './enums/task-status.enum';
+import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 
 @Injectable()
 export class TasksService {
@@ -17,9 +18,44 @@ export class TasksService {
     private readonly taskRepository: TaskRepository,
   ) {}
 
-  async getAllTasks(): Promise<TaskEntity[]> {
-    return this.taskRepository.find();
+  async getAllTasks(filterDto: GetTasksFilterDto): Promise<TaskEntity[]> {
+    const { status, search } = filterDto;
+    const query = this.taskRepository.createQueryBuilder('task');
+    if (status) {
+      query.andWhere('task.status = :status', {
+        status,
+      });
+    }
+
+    if (search) {
+      query.andWhere(
+        '(task.title LIKE :search OR task.description LIKE :search)',
+        {
+          search: `%${search}%`,
+        },
+      );
+    }
+    return query.getMany();
   }
+
+  // getAllTasks(): Tasks[] {
+  //   return tasks;
+  // }
+
+  // getTasksWithFilters(filterDto: GetTasksFilterDto) {
+  //   const { status, search } = filterDto;
+  //   let tasks: Task[] = this.getAllTasks();
+  //   if (status) {
+  //     tasks = tasks.filter((task: Task) => task.status === status);
+  //   }
+  //   if (search) {
+  //     tasks = tasks.filter(
+  //       (task: Task) =>
+  //         task.title.includes(search) || task.description.includes(search),
+  //     );
+  //   }
+  //   return tasks;
+  // }
 
   async getTaskById(id: number): Promise<TaskEntity> {
     const found = await this.taskRepository.findOne(id);
@@ -103,18 +139,4 @@ export class TasksService {
   //   return task;
   // }
   //
-  // getTasksWithFilters(filterDto: GetTasksFilterDto) {
-  //   const { status, search } = filterDto;
-  //   let tasks: Task[] = this.getAllTasks();
-  //   if (status) {
-  //     tasks = tasks.filter((task: Task) => task.status === status);
-  //   }
-  //   if (search) {
-  //     tasks = tasks.filter(
-  //       (task: Task) =>
-  //         task.title.includes(search) || task.description.includes(search),
-  //     );
-  //   }
-  //   return tasks;
-  // }
 }
