@@ -11,7 +11,7 @@ export class AuthService {
     private readonly userRepository: UserRepository,
   ) {}
 
-  async signUp(authCredentialDto: AuthCredentialsDto) {
+  async signUp(authCredentialDto: AuthCredentialsDto): Promise<void> {
     const { username, password } = authCredentialDto;
     const user = new UserEntity();
     user.username = username;
