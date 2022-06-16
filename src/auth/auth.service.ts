@@ -16,13 +16,20 @@ export class AuthService {
     private readonly userRepository: UserRepository,
   ) {}
 
+  private static async hashPassword(
+    password: string,
+    salt: string,
+  ): Promise<string> {
+    return bcrypt.hash(password, salt);
+  }
+
   async signUp(authCredentialDto: AuthCredentialsDto): Promise<void> {
     const { username, password } = authCredentialDto;
 
     const user = new UserEntity();
     user.username = username;
     user.salt = await bcrypt.genSalt();
-    user.password = await this.hashPassword(password, user.salt);
+    user.password = await AuthService.hashPassword(password, user.salt);
     console.log(this.userRepository);
     try {
       await user.save();
@@ -34,9 +41,5 @@ export class AuthService {
         throw new InternalServerErrorException();
       }
     }
-  }
-
-  private async hashPassword(password: string, salt: string): Promise<string> {
-    return bcrypt.hash(password, salt);
   }
 }
