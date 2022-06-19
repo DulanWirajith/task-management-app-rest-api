@@ -5,6 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UserEntity } from './user.entity';
+import { JwtStrategy } from './jwt-strategy';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { UserEntity } from './user.entity';
       defaultStrategy: 'jwt',
     }),
     JwtModule.register({
-      secret: 'dulan-is-here',
+      secret: process.env['secret-key'],
       signOptions: {
         expiresIn: 3600,
       },
@@ -20,6 +21,7 @@ import { UserEntity } from './user.entity';
     TypeOrmModule.forFeature([UserEntity]),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
+  exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}
